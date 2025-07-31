@@ -1,1 +1,122 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arya Dekorasyon | İletişim</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo-container">
+                <img src="logo.png" alt="Arya Dekorasyon Logo" class="logo">
+                <span class="company-name">ARYA DEKORASYON</span>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html">Ana Sayfa</a></li>
+                    <li><a href="services.html">Hizmetler</a></li>
+                    <li><a href="gallery.html">Projeler</a></li>
+                    <li><a href="contact.html">İletişim</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
 
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <h2 class="section-title">Bize Ulaşın</h2>
+            <div class="contact-grid">
+                <div class="contact-form">
+                    <h3>Bize Mesaj Gönderin</h3>
+                    <form action="https://formspree.io/f/your-form-id" method="POST">
+                        <input type="text" name="name" placeholder="Adınız" required>
+                        <input type="email" name="email" placeholder="E-posta" required>
+                        <textarea name="message" placeholder="Mesajınız" required></textarea>
+                        <button type="submit" class="btn btn-primary">Gönder</button>
+                    </form>
+                </div>
+                <div class="contact-map-container">
+                    <h3>Konumumuz</h3>
+                    <img src="images/harita.jpg" alt="Harita" class="contact-map" onclick="openLightbox('images/harita.jpg')">
+                </div>
+            </div>
+            <div class="contact-info">
+                <h3>İletişim Bilgileri</h3>
+                <ul>
+                    <li><i class="fas fa-phone"></i> +90 545 788 49 75</li>
+                    <li><i class="fas fa-phone"></i> +90 554 167 48 04</li>
+                    <li><i class="fas fa-envelope"></i> info@arya-dekorasyon.com</li>
+                    <li><i class="fas fa-map-marker-alt"></i> İstanbul, Türkiye</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <div class="lightbox-content" onclick="event.stopPropagation()">
+            <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
+            <img id="lightbox-img" class="lightbox-img" src="" alt="Büyütülmüş Görsel">
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <img src="logo.png" alt="Arya Dekorasyon Logo" class="footer-logo">
+                    <p>Kaliteli işçilik, uygun fiyat ve müşteri memnuniyeti ilkelerimizle hizmet veriyoruz.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Hızlı Linkler</h3>
+                    <ul>
+                        <li><a href="index.html">Ana Sayfa</a></li>
+                        <li><a href="services.html">Hizmetler</a></li>
+                        <li><a href="gallery.html">Projeler</a></li>
+                        <li><a href="contact.html">İletişim</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>İletişim</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-phone"></i> +90 545 788 49 75</li>
+                        <li><i class="fas fa-phone"></i> +90 554 167 48 04</li>
+                        <li><i class="fas fa-envelope"></i> info@arya-dekorasyon.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> İstanbul, Türkiye</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Arya Dekorasyon. Tüm hakları saklıdır.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Fixed Contact Buttons -->
+    <div class="fixed-contact-buttons">
+        <a href="tel:+905541674804" class="fixed-call">
+            <i class="fas fa-phone"></i>
+        </a>
+        <a href="https://wa.me/905541674804" class="fixed-whatsapp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
