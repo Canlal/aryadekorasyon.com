@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arya Dekorasyon | Profesyonel Yapı Hizmetleri</title>
+    <title>Arya Dekorasyon | Profesyonel Dekorasyon Hizmetleri</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Logo size adjustments */
+        /* Logo ayarları */
         .logo {
             height: 70px;
             width: auto;
@@ -24,15 +24,15 @@
             align-items: center;
         }
         
-        /* Project images */
+        /* Proje görselleri */
         .project-card img {
             width: 100%;
-            height: 100%;
+            height: 300px;
             object-fit: cover;
             display: block;
         }
         
-        /* Lightbox styles */
+        /* Lightbox stilleri */
         .lightbox {
             display: none;
             position: fixed;
@@ -52,6 +52,8 @@
         .lightbox-img {
             max-width: 90%;
             max-height: 80vh;
+            border: 3px solid white;
+            border-radius: 5px;
         }
         .close-lightbox {
             position: absolute;
@@ -66,6 +68,20 @@
             transition: transform 0.3s;
         }
         .thumbnail:hover {
+            transform: scale(1.03);
+        }
+        
+        /* İletişim sayfası harita görseli */
+        .contact-map {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            cursor: pointer;
+            border: 3px solid #f1f1f1;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+        .contact-map:hover {
             transform: scale(1.02);
         }
     </style>
@@ -168,14 +184,6 @@
         </div>
     </section>
 
-    <!-- Lightbox -->
-    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-        <div class="lightbox-content" onclick="event.stopPropagation()">
-            <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
-            <img id="lightbox-img" class="lightbox-img" src="" alt="Büyütülmüş Görsel">
-        </div>
-    </div>
-
     <!-- Testimonials -->
     <section class="testimonials">
         <div class="container">
@@ -193,6 +201,14 @@
             </div>
         </div>
     </section>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <div class="lightbox-content" onclick="event.stopPropagation()">
+            <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
+            <img id="lightbox-img" class="lightbox-img" src="" alt="Büyütülmüş Görsel">
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">
@@ -243,7 +259,7 @@
     </div>
 
     <script>
-        // Lightbox functions
+        // Lightbox fonksiyonları
         function openLightbox(imgSrc) {
             document.getElementById('lightbox-img').src = imgSrc;
             document.getElementById('lightbox').style.display = 'block';
@@ -255,19 +271,27 @@
             document.body.style.overflow = 'auto';
         }
         
-        // Close with ESC key
+        // ESC tuşuyla kapatma
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeLightbox();
             }
         });
         
-        // Proje-1.jpg kontrolü
+        // Görsel yükleme kontrolleri
         document.addEventListener('DOMContentLoaded', function() {
-            const img = new Image();
-            img.src = 'images/proje-1.jpg';
-            img.onerror = function() {
+            // Proje-1.jpg kontrolü
+            const projeImg = new Image();
+            projeImg.src = 'images/proje-1.jpg';
+            projeImg.onerror = function() {
                 document.querySelector('.project-card img').src = 'images/default-project.jpg';
+            };
+            
+            // Harita.jpg kontrolü
+            const haritaImg = new Image();
+            haritaImg.src = 'images/harita.jpg';
+            haritaImg.onerror = function() {
+                console.log('Harita görseli yüklenemedi');
             };
         });
     </script>
