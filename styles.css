@@ -1,11 +1,10 @@
-
 /* Global Styles */
 :root {
-    --primary-color: #FF6B6B;
-    --secondary-color: #4ECDC4;
-    --dark-color: #292F36;
-    --light-color: #F7FFF7;
-    --accent-color: #FFE66D;
+    --primary-color: #3498db;
+    --secondary-color: #2ecc71;
+    --dark-color: #2c3e50;
+    --light-color: #ecf0f1;
+    --accent-color: #f39c12;
     --text-color: #333;
     --text-light: #777;
 }
@@ -60,6 +59,8 @@ body {
     font-weight: 700;
     font-size: 1.5rem;
     color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .nav ul {
