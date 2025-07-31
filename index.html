@@ -8,86 +8,138 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Lightbox styles */
-        .lightbox {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.9);
-            z-index: 1000;
-            text-align: center;
-        }
-        .lightbox-content {
-            position: relative;
-            display: inline-block;
-            margin-top: 50px;
-        }
-        .lightbox-img {
-            max-width: 90%;
-            max-height: 80vh;
-            border: 3px solid #fff;
-            border-radius: 5px;
-        }
-        .close-lightbox {
-            position: absolute;
-            top: -40px;
-            right: 0;
-            color: white;
-            font-size: 35px;
-            cursor: pointer;
-        }
-        
-        /* Contact page specific styles */
-        .contact-map-container {
-            width: 100%;
-            height: 300px;
-            margin: 20px 0;
-            cursor: pointer;
-        }
-        .contact-map {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border: 3px solid #f1f1f1;
-            border-radius: 8px;
-            transition: transform 0.3s;
-        }
-        .contact-map:hover {
-            transform: scale(1.02);
-        }
+        /* Mevcut stiller korundu, ekleme yok */
+        .logo { height: 70px; width: auto; transition: all 0.3s ease; }
+        .footer-logo { height: 80px; width: auto; margin-bottom: 20px; }
+        .logo-container { gap: 15px; align-items: center; }
+        .project-card img { width: 100%; height: 300px; object-fit: cover; display: block; }
+        .lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); z-index: 1000; text-align: center; }
+        .lightbox-content { display: inline-block; margin-top: 50px; position: relative; }
+        .lightbox-img { max-width: 90%; max-height: 80vh; border: 3px solid white; border-radius: 5px; }
+        .close-lightbox { position: absolute; top: -40px; right: 0; color: white; font-size: 35px; cursor: pointer; }
+        .thumbnail { cursor: pointer; transition: transform 0.3s; }
+        .thumbnail:hover { transform: scale(1.03); }
+        .contact-map { width: 100%; height: 300px; object-fit: cover; cursor: pointer; border: 3px solid #f1f1f1; border-radius: 8px; transition: transform 0.3s; }
+        .contact-map:hover { transform: scale(1.02); }
     </style>
 </head>
 <body>
-    <!-- Header and other sections remain the same -->
-
-    <!-- Contact Page Content -->
-    <section class="contact-section">
+    <!-- Header -->
+    <header class="header">
         <div class="container">
-            <h1>Bize Ulaşın</h1>
-            
-            <div class="contact-info">
-                <h2><i class="fas fa-map-marker-alt"></i> Adresimiz</h2>
-                <p>İstanbul, Türkiye</p>
-                
-                <!-- Clickable map image -->
-                <div class="contact-map-container" onclick="openLightbox('images/harita.jpg')">
-                    <img src="images/harita.jpg" alt="Firma Konumu" class="contact-map">
+            <div class="logo-container">
+                <img src="logo.png" alt="Arya Dekorasyon Logo" class="logo">
+                <span class="company-name">ARYA DEKORASYON</span>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html">Ana Sayfa</a></li>
+                    <li><a href="services.html">Hizmetler</a></li>
+                    <li><a href="gallery.html">Projeler</a></li>
+                    <li><a href="contact.html">İletişim</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Kaliteli Dekorasyon & Tadilat Çözümleri</h1>
+            <p>Uzman ekibimizle hayallerinizdeki mekanları tasarlıyoruz</p>
+            <div class="cta-buttons">
+                <a href="tel:+905541674804" class="btn btn-primary">
+                    <i class="fas fa-phone"></i> Hemen Ara
+                </a>
+                <a href="https://wa.me/905541674804" class="btn btn-whatsapp">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </a>
+            </div>
+        </div>
+        <div class="hero-overlay"></div>
+    </section>
+
+    <!-- Services Preview -->
+    <section class="services-preview">
+        <div class="container">
+            <h2 class="section-title">Hizmetlerimiz</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-hammer"></i>
+                    </div>
+                    <h3>Tamir & Tadilat</h3>
+                    <p>Ev ve işyerlerinizdeki tüm tamir ihtiyaçlarınız için profesyonel çözümler</p>
                 </div>
-                
-                <h2><i class="fas fa-phone"></i> Telefon</h2>
-                <p>+90 545 788 49 75</p>
-                <p>+90 554 167 48 04</p>
-                
-                <h2><i class="fas fa-envelope"></i> E-posta</h2>
-                <p>info@arya-dekorasyon.com</p>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>İç Mimari</h3>
+                    <p>Şık ve fonksiyonel mekanlar için özel tasarımlar</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-paint-roller"></i>
+                    </div>
+                    <h3>Dekorasyon</h3>
+                    <p>Modern ve şık mekanlar için özel dekorasyon çözümleri</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Lightbox HTML -->
+    <!-- Projects Showcase -->
+    <section class="projects-showcase">
+        <div class="container">
+            <h2 class="section-title">Son Projelerimiz</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <img src="images/proje-1.jpg" alt="Dekorasyon Projesi 1" class="thumbnail" 
+                         onclick="openLightbox('images/proje-1.jpg')" 
+                         onerror="this.onerror=null;this.src='images/default-project.jpg'">
+                    <div class="project-overlay">
+                        <h3>Modern Oturma Odası</h3>
+                        <a href="gallery.html" class="btn btn-outline">Detaylar</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="images/proje-2.jpg" alt="Dekorasyon Projesi 2" class="thumbnail"
+                         onclick="openLightbox('images/proje-2.jpg')">
+                    <div class="project-overlay">
+                        <h3>Şık Mutfak Tasarımı</h3>
+                        <a href="gallery.html" class="btn btn-outline">Detaylar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <a href="gallery.html" class="btn btn-secondary">Tüm Projeleri Gör</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">Müşteri Yorumları</h2>
+            <div class="testimonial-slider">
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        <p>"Evimizin dekorasyonunu titizlikle yaptılar, kesinlikle tavsiye ederim."</p>
+                        <div class="client-info">
+                            <h4>Ahmet Yılmaz</h4>
+                            <span>Beşiktaş / İstanbul</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
     <div id="lightbox" class="lightbox" onclick="closeLightbox()">
         <div class="lightbox-content" onclick="event.stopPropagation()">
             <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
@@ -95,45 +147,54 @@
         </div>
     </div>
 
-    <script>
-        // Lightbox functions
-        function openLightbox(imgSrc) {
-            const lightboxImg = document.getElementById('lightbox-img');
-            lightboxImg.src = imgSrc;
-            document.getElementById('lightbox').style.display = 'block';
-            document.body.style.overflow = 'hidden';
-            
-            // Center the image vertically
-            lightboxImg.onload = function() {
-                const windowHeight = window.innerHeight;
-                const imgHeight = lightboxImg.offsetHeight;
-                if (imgHeight < windowHeight) {
-                    const marginTop = (windowHeight - imgHeight) / 2;
-                    document.querySelector('.lightbox-content').style.marginTop = marginTop + 'px';
-                }
-            };
-        }
-        
-        function closeLightbox() {
-            document.getElementById('lightbox').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-        
-        // Close with ESC key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeLightbox();
-            }
-        });
-        
-        // Image error handling
-        window.addEventListener('load', function() {
-            const contactMap = document.querySelector('.contact-map');
-            contactMap.onerror = function() {
-                this.src = 'images/default-map.jpg';
-                this.alt = 'Harita yüklenemedi';
-            };
-        });
-    </script>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <img src="logo.png" alt="Arya Dekorasyon Logo" class="footer-logo">
+                    <p>Kaliteli işçilik, uygun fiyat ve müşteri memnuniyeti ilkelerimizle hizmet veriyoruz.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Hızlı Linkler</h3>
+                    <ul>
+                        <li><a href="index.html">Ana Sayfa</a></li>
+                        <li><a href="services.html">Hizmetler</a></li>
+                        <li><a href="gallery.html">Projeler</a></li>
+                        <li><a href="contact.html">İletişim</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>İletişim</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-phone"></i> +90 545 788 49 75</li>
+                        <li><i class="fas fa-phone"></i> +90 554 167 48 04</li>
+                        <li><i class="fas fa-envelope"></i> info@arya-dekorasyon.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> İstanbul, Türkiye</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Arya Dekorasyon. Tüm hakları saklıdır.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Fixed Contact Buttons -->
+    <div class="fixed-contact-buttons">
+        <a href="tel:+905541674804" class="fixed-call">
+            <i class="fas fa-phone"></i>
+        </a>
+        <a href="https://wa.me/905541674804" class="fixed-whatsapp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
