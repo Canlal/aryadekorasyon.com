@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nova İnşaat | Profesyonel Yapı Hizmetleri</title>
+    <title>Arya Dekorasyon | Profesyonel Yapı Hizmetleri</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -23,6 +23,13 @@
             gap: 15px;
             align-items: center;
         }
+        /* Ensure project images display properly */
+        .project-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block; /* Fix for images not showing */
+        }
     </style>
 </head>
 <body>
@@ -30,8 +37,8 @@
     <header class="header">
         <div class="container">
             <div class="logo-container">
-                <img src="logo.png" alt="Nova İnşaat Logo" class="logo">
-                <span class="company-name">NOVA İNŞAAT</span>
+                <img src="logo.png" alt="Arya Dekorasyon Logo" class="logo">
+                <span class="company-name">ARYA DEKORASYON</span>
             </div>
             <nav class="nav">
                 <ul>
@@ -50,13 +57,13 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>Kaliteli İnşaat & Dekorasyon Çözümleri</h1>
-            <p>Uzman ekibimizle hayallerinizdeki mekanları inşa ediyoruz</p>
+            <h1>Kaliteli Dekorasyon & Tadilat Çözümleri</h1>
+            <p>Uzman ekibimizle hayallerinizdeki mekanları tasarlıyoruz</p>
             <div class="cta-buttons">
-                <a href="tel:+905457884975" class="btn btn-primary">
+                <a href="tel:+905541674804" class="btn btn-primary">
                     <i class="fas fa-phone"></i> Hemen Ara
                 </a>
-                <a href="https://wa.me/905457884975" class="btn btn-whatsapp">
+                <a href="https://wa.me/905541674804" class="btn btn-whatsapp">
                     <i class="fab fa-whatsapp"></i> WhatsApp
                 </a>
             </div>
@@ -80,8 +87,8 @@
                     <div class="service-icon">
                         <i class="fas fa-home"></i>
                     </div>
-                    <h3>İnşaat</h3>
-                    <p>Sıfırdan anahtar teslim konut ve işyeri inşaatları</p>
+                    <h3>İç Mimari</h3>
+                    <p>Şık ve fonksiyonel mekanlar için özel tasarımlar</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">
@@ -100,16 +107,16 @@
             <h2 class="section-title">Son Projelerimiz</h2>
             <div class="projects-grid">
                 <div class="project-card">
-                    <img src="images/proje-1.jpg" alt="Proje 1">
+                    <img src="images/proje-1.jpg" alt="Dekorasyon Projesi 1" onerror="this.src='images/default-project.jpg'">
                     <div class="project-overlay">
-                        <h3>Lüks Villa İnşaatı</h3>
+                        <h3>Modern Oturma Odası</h3>
                         <a href="gallery.html" class="btn btn-outline">Detaylar</a>
                     </div>
                 </div>
                 <div class="project-card">
-                    <img src="images/proje-2.jpg" alt="Proje 2">
+                    <img src="images/proje-2.jpg" alt="Dekorasyon Projesi 2">
                     <div class="project-overlay">
-                        <h3>Ofis Tadilatı</h3>
+                        <h3>Şık Mutfak Tasarımı</h3>
                         <a href="gallery.html" class="btn btn-outline">Detaylar</a>
                     </div>
                 </div>
@@ -127,7 +134,7 @@
             <div class="testimonial-slider">
                 <div class="testimonial">
                     <div class="testimonial-content">
-                        <p>"Evimizin tüm tadilatını titizlikle yaptılar, kesinlikle tavsiye ederim."</p>
+                        <p>"Evimizin dekorasyonunu titizlikle yaptılar, kesinlikle tavsiye ederim."</p>
                         <div class="client-info">
                             <h4>Ahmet Yılmaz</h4>
                             <span>Beşiktaş / İstanbul</span>
@@ -143,7 +150,7 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
-                    <img src="logo.png" alt="Nova İnşaat Logo" class="footer-logo">
+                    <img src="logo.png" alt="Arya Dekorasyon Logo" class="footer-logo">
                     <p>Kaliteli işçilik, uygun fiyat ve müşteri memnuniyeti ilkelerimizle hizmet veriyoruz.</p>
                 </div>
                 <div class="footer-col">
@@ -158,19 +165,18 @@
                 <div class="footer-col">
                     <h3>İletişim</h3>
                     <ul class="contact-info">
-                        <li><i class="fas fa-phone"></i> +90 545 788 49 75</li>
                         <li><i class="fas fa-phone"></i> +90 554 167 48 04</li>
-                        <li><i class="fas fa-envelope"></i> info@nova-insaat.com</li>
+                        <li><i class="fas fa-envelope"></i> info@arya-dekorasyon.com</li>
                         <li><i class="fas fa-map-marker-alt"></i> İstanbul, Türkiye</li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2023 Nova İnşaat. Tüm hakları saklıdır.</p>
+                <p>&copy; 2023 Arya Dekorasyon. Tüm hakları saklıdır.</p>
                 <div class="social-links">
                     <a href="#"><i class="fab fa-facebook-f"></i></a>
                     <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
         </div>
@@ -178,10 +184,10 @@
 
     <!-- Fixed Contact Buttons -->
     <div class="fixed-contact-buttons">
-        <a href="tel:+905457884975" class="fixed-call">
+        <a href="tel:+905541674804" class="fixed-call">
             <i class="fas fa-phone"></i>
         </a>
-        <a href="https://wa.me/905457884975" class="fixed-whatsapp">
+        <a href="https://wa.me/905541674804" class="fixed-whatsapp">
             <i class="fab fa-whatsapp"></i>
         </a>
     </div>
