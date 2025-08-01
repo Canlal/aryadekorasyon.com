@@ -169,7 +169,7 @@
         /* Hero Section */
         .hero {
             height: 100vh;
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1600566752229-250d58d2406e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
             background-size: cover;
             background-position: center;
             display: flex;
@@ -178,6 +178,25 @@
             text-align: center;
             color: white;
             margin-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .hero-background.active {
+            opacity: 1;
         }
         
         .hero-content {
@@ -651,6 +670,12 @@
 
     <!-- Hero Section -->
     <section class="hero" id="home">
+        <!-- Rotating background images -->
+        <div class="hero-background active" style="background-image: url('https://images.unsplash.com/photo-1600566752229-250d58d2406e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');"></div>
+        <div class="hero-background" style="background-image: url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');"></div>
+        <div class="hero-background" style="background-image: url('https://images.unsplash.com/photo-1600607688969-a5bfcd646154?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');"></div>
+        <div class="hero-background" style="background-image: url('https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');"></div>
+        
         <div class="hero-content">
             <h1>Estetik ve Kalite Katıyoruz</h1>
             <p>Profesyonel dekorasyon çözümleri ile hayallerinizdeki yaşam alanlarını birlikte tasarlayalım</p>
@@ -710,7 +735,7 @@
             <!-- Lüks Banyo Dekorasyonu (Fayans Görseli) -->
             <div class="project-card">
                 <div class="project-image">
-                    <img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80" alt="Lüks Banyo Dekorasyonu">
+                    <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80" alt="Lüks Banyo Dekorasyonu">
                 </div>
                 <div class="project-info">
                     <span class="project-tag">Banyo Dekorasyonu</span>
@@ -722,7 +747,7 @@
             <!-- Dış Cephe Boyama -->
             <div class="project-card">
                 <div class="project-image">
-                    <img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80" alt="Dış Cephe Boyama">
+                    <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80" alt="Dış Cephe Boyama">
                 </div>
                 <div class="project-info">
                     <span class="project-tag">Dış Cephe</span>
@@ -902,6 +927,19 @@
                 card.style.transform = 'translateY(0)';
             });
         });
+        
+        // Hero background image rotation
+        const heroBackgrounds = document.querySelectorAll('.hero-background');
+        let currentBackground = 0;
+        
+        function rotateBackground() {
+            heroBackgrounds[currentBackground].classList.remove('active');
+            currentBackground = (currentBackground + 1) % heroBackgrounds.length;
+            heroBackgrounds[currentBackground].classList.add('active');
+        }
+        
+        // Rotate every 5 seconds
+        setInterval(rotateBackground, 5000);
     </script>
 </body>
 </html>
