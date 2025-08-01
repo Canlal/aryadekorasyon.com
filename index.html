@@ -142,6 +142,7 @@
             background-color: white;
             box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
             z-index: 999;
+            padding: 20px 0;
         }
         
         .mobile-menu.active {
@@ -150,11 +151,11 @@
         
         .mobile-menu ul {
             list-style: none;
-            padding: 20px;
         }
         
         .mobile-menu ul li {
             margin-bottom: 15px;
+            text-align: center;
         }
         
         .mobile-menu ul li a {
@@ -163,13 +164,16 @@
             font-size: 18px;
             display: block;
             padding: 10px;
-            border-bottom: 1px solid #eee;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-menu ul li a:hover {
+            color: var(--primary);
         }
         
         /* Hero Section */
         .hero {
             height: 100vh;
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
             background-size: cover;
             background-position: center;
             display: flex;
@@ -590,12 +594,14 @@
             .hero-buttons {
                 flex-direction: column;
                 align-items: center;
+                gap: 15px;
             }
             
             .whatsapp-button, .call-button {
                 width: 100%;
                 max-width: 250px;
                 justify-content: center;
+                padding: 12px 20px;
             }
             
             .contact-container {
@@ -606,6 +612,19 @@
                 order: -1;
                 height: 300px;
             }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .project-card {
+                margin-bottom: 20px;
+            }
+            
+            .mobile-menu ul li {
+                margin-bottom: 10px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -615,10 +634,12 @@
             
             .hero h1 {
                 margin-bottom: 15px;
+                font-size: 1.8rem;
             }
             
             .hero p {
                 margin-bottom: 25px;
+                font-size: 1rem;
             }
             
             .projects {
@@ -631,6 +652,21 @@
             
             .footer-container {
                 grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .footer-column {
+                margin-bottom: 20px;
+            }
+            
+            .contact-method {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .contact-icon {
+                margin-right: 0;
+                margin-bottom: 10px;
             }
         }
     </style>
@@ -715,7 +751,7 @@
                 </div>
                 <div class="project-info">
                     <span class="project-tag">Mutfak Tasarımı</span>
-                    <h3>Premium Mutfak Yenileme</h3>
+                    <h3>Premium Banyo Yenileme</h3>
                     <p>Yüksek kaliteli malzemelerle modern mutfak tasarımı ve uygulaması</p>
                 </div>
             </div>
@@ -739,7 +775,7 @@
                 </div>
                 <div class="project-info">
                     <span class="project-tag">Döşeme Dekorasyonu</span>
-                    <h3>Lüks Banyo Renovasyonu</h3>
+                    <h3>Lüks Ofis Renovasyonu</h3>
                     <p>Premium malzemelerle modern ve şık döşeme tasarımları</p>
                 </div>
             </div>
@@ -751,7 +787,7 @@
                 </div>
                 <div class="project-info">
                     <span class="project-tag">Dış Cephe</span>
-                    <h3>Modern Dış Cephe montalama Boyama</h3>
+                    <h3>Modern Dış Cephe Montalama Boyama</h3>
                     <p>Yüksek kaliteli boyalarla dış cephe yenileme çalışmaları</p>
                 </div>
             </div>
