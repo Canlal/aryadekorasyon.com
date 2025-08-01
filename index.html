@@ -174,7 +174,7 @@
         /* Hero Section */
         .hero {
             height: 100vh;
-            background-color: #000; /* İlk açılışta simsiyah ekran */
+            background-color: #000; /* İlk açılışta ve geçişlerde simsiyah */
             margin-top: 80px;
             position: relative;
             overflow: hidden;
@@ -210,8 +210,8 @@
             font-size: clamp(2.5rem, 6vw, 4rem);
             font-weight: 700;
             margin-bottom: 25px;
-            color: var(--light);
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+            color: #fff; /* Saf beyaz, açık renkler kaldırıldı */
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
         }
         
         .hero-buttons {
@@ -698,7 +698,7 @@
     <!-- Hero Section -->
     <section class="hero" id="home">
         <!-- Rotating background images -->
-        <div class="hero-background active" style="background-image: url('https://images.unsplash.com/photo-1600566752229-250d58d2406e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');"></div>
+        <div class="hero-background" style="background-image: url('https://images.unsplash.com/photo-1600566752229-250d58d2406e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');"></div>
         <div class="hero-background" style="background-image: url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');"></div>
         <div class="hero-background" style="background-image: url('https://images.unsplash.com/photo-1600607688969-a5bfcd646154?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');"></div>
         <div class="hero-background" style="background-image: url('https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');"></div>
@@ -953,7 +953,7 @@
             });
         });
         
-        // Hero background image rotation
+        // Hero background image rotation with black transition
         const hero = document.querySelector('.hero');
         const heroBackgrounds = document.querySelectorAll('.hero-background');
         let currentBackground = 0;
@@ -961,18 +961,23 @@
         // İlk açılışta simsiyah ekran, 0.5 saniye sonra ilk resim
         window.addEventListener('load', () => {
             setTimeout(() => {
-                hero.style.backgroundColor = 'transparent';
                 heroBackgrounds[0].classList.add('active');
             }, 500);
         });
         
         function rotateBackground() {
+            // Mevcut resmi gizle ve ekranı simsiyah yap
             heroBackgrounds[currentBackground].classList.remove('active');
-            currentBackground = (currentBackground + 1) % heroBackgrounds.length;
-            heroBackgrounds[currentBackground].classList.add('active');
+            hero.style.backgroundColor = '#000';
+            
+            // 0.3 saniye simsiyah ekran, sonra yeni resim
+            setTimeout(() => {
+                currentBackground = (currentBackground + 1) % heroBackgrounds.length;
+                heroBackgrounds[currentBackground].classList.add('active');
+            }, 300);
         }
         
-        // Rotate every 5 seconds, starting after initial delay
+        // Her 5 saniyede bir geçiş, ilk gecikmeden sonra başla
         setTimeout(() => {
             setInterval(rotateBackground, 5000);
         }, 500);
