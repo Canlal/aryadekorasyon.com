@@ -7,24 +7,8 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <style>
-        /* Mevcut stiller korundu, ekleme yok */
-        .logo { height: 70px; width: auto; transition: all 0.3s ease; }
-        .footer-logo { height: 80px; width: auto; margin-bottom: 20px; }
-        .logo-container { gap: 15px; align-items: center; }
-        .project-card img { width: 100%; height: 300px; object-fit: cover; display: block; }
-        .lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); z-index: 1000; text-align: center; }
-        .lightbox-content { display: inline-block; margin-top: 50px; position: relative; }
-        .lightbox-img { max-width: 90%; max-height: 80vh; border: 3px solid white; border-radius: 5px; }
-        .close-lightbox { position: absolute; top: -40px; right: 0; color: white; font-size: 35px; cursor: pointer; }
-        .thumbnail { cursor: pointer; transition: transform 0.3s; }
-        .thumbnail:hover { transform: scale(1.03); }
-        .contact-map { width: 100%; height: 300px; object-fit: cover; cursor: pointer; border: 3px solid #f1f1f1; border-radius: 8px; transition: transform 0.3s; }
-        .contact-map:hover { transform: scale(1.02); }
-    </style>
 </head>
 <body>
-    <!-- Header -->
     <header class="header">
         <div class="container">
             <div class="logo-container">
@@ -45,7 +29,6 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
             <h1>Kaliteli Dekorasyon & Tadilat Çözümleri</h1>
@@ -62,7 +45,6 @@
         <div class="hero-overlay"></div>
     </section>
 
-    <!-- Services Preview -->
     <section class="services-preview">
         <div class="container">
             <h2 class="section-title">Hizmetlerimiz</h2>
@@ -92,7 +74,6 @@
         </div>
     </section>
 
-    <!-- Projects Showcase -->
     <section class="projects-showcase">
         <div class="container">
             <h2 class="section-title">Son Projelerimiz</h2>
@@ -100,7 +81,7 @@
                 <div class="project-card">
                     <img src="images/proje-1.jpg" alt="Dekorasyon Projesi 1" class="thumbnail" 
                          onclick="openLightbox('images/proje-1.jpg')" 
-                         onerror="this.onerror=null;this.src='images/default-project.jpg'">
+                         onerror="this.onerror=null;this.src='images/default-project.jpg';">
                     <div class="project-overlay">
                         <h3>Modern Oturma Odası</h3>
                         <a href="gallery.html" class="btn btn-outline">Detaylar</a>
@@ -108,7 +89,8 @@
                 </div>
                 <div class="project-card">
                     <img src="images/proje-2.jpg" alt="Dekorasyon Projesi 2" class="thumbnail"
-                         onclick="openLightbox('images/proje-2.jpg')">
+                         onclick="openLightbox('images/proje-2.jpg')" 
+                         onerror="this.onerror=null;this.src='images/default-project.jpg';">
                     <div class="project-overlay">
                         <h3>Şık Mutfak Tasarımı</h3>
                         <a href="gallery.html" class="btn btn-outline">Detaylar</a>
@@ -121,7 +103,6 @@
         </div>
     </section>
 
-    <!-- Testimonials -->
     <section class="testimonials">
         <div class="container">
             <h2 class="section-title">Müşteri Yorumları</h2>
@@ -139,7 +120,6 @@
         </div>
     </section>
 
-    <!-- Lightbox -->
     <div id="lightbox" class="lightbox" onclick="closeLightbox()">
         <div class="lightbox-content" onclick="event.stopPropagation()">
             <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
@@ -147,7 +127,6 @@
         </div>
     </div>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
@@ -185,7 +164,6 @@
         </div>
     </footer>
 
-    <!-- Fixed Contact Buttons -->
     <div class="fixed-contact-buttons">
         <a href="tel:+905541674804" class="fixed-call">
             <i class="fas fa-phone"></i>
