@@ -179,6 +179,9 @@
             margin-top: 80px;
             position: relative;
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .hero-background {
@@ -196,6 +199,67 @@
         
         .hero-background.active {
             opacity: 1;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+            z-index: 1;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .whatsapp-button {
+            display: inline-flex;
+            align-items: center;
+            background-color: #25D366;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .whatsapp-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            background-color: #1fa851;
+        }
+        
+        .whatsapp-button i {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        
+        .call-button {
+            display: inline-flex;
+            align-items: center;
+            background-color: #34b7f1;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .call-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            background-color: #2a9fd8;
+        }
+        
+        .call-button i {
+            margin-right: 10px;
+            font-size: 20px;
         }
         
         /* Projects Section */
@@ -513,6 +577,19 @@
                 margin-top: 70px;
             }
             
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .whatsapp-button, .call-button {
+                width: 100%;
+                max-width: 250px;
+                justify-content: center;
+                padding: 12px 20px;
+            }
+            
             .contact-container {
                 grid-template-columns: 1fr;
             }
@@ -610,6 +687,17 @@
         <div class="hero-background" style="background-image: url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');"></div>
         <div class="hero-background" style="background-image: url('https://images.unsplash.com/photo-1600607688969-a5bfcd646154?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');"></div>
         <div class="hero-background" style="background-image: url('https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');"></div>
+        
+        <div class="hero-content">
+            <div class="hero-buttons">
+                <a href="https://wa.me/905457884975" class="whatsapp-button">
+                    <i class="fab fa-whatsapp"></i> Hemen Teklif Alın
+                </a>
+                <a href="tel:05541674804" class="call-button">
+                    <i class="fas fa-phone-alt"></i> Hemen Arayın
+                </a>
+            </div>
+        </div>
     </section>
 
     <!-- Projects Section -->
@@ -636,7 +724,7 @@
                     <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80" alt="Mutfak Tasarımı">
                 </div>
                 <div class="project-info">
-                    <span class="project-tag">banyo Tasarımı</span>
+                    <span class="project-tag">Mutfak Tasarımı</span>
                     <h3>Premium Banyo Yenileme</h3>
                     <p>Yüksek kaliteli malzemelerle modern mutfak tasarımı ve uygulaması</p>
                 </div>
