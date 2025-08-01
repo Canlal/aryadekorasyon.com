@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Header -->
     <header class="header">
         <div class="container">
             <div class="logo-container">
@@ -30,23 +29,13 @@
         </div>
     </header>
 
-    <!-- Contact Section -->
     <section class="contact-section">
         <div class="container">
             <h2 class="section-title">Bize Ulaşın</h2>
             <div class="contact-grid">
-                <div class="contact-form">
-                    <h3>Bize Mesaj Gönderin</h3>
-                    <form action="https://formspree.io/f/your-form-id" method="POST">
-                        <input type="text" name="name" placeholder="Adınız" required>
-                        <input type="email" name="email" placeholder="E-posta" required>
-                        <textarea name="message" placeholder="Mesajınız" required></textarea>
-                        <button type="submit" class="btn btn-primary">Gönder</button>
-                    </form>
-                </div>
                 <div class="contact-map-container">
                     <h3>Konumumuz</h3>
-                    <img src="images/harita.jpg" alt="Harita" class="contact-map" onclick="openLightbox('images/harita.jpg')">
+                    <img src="images/harita.jpg" alt="Harita" class="contact-map" onclick="openLightbox('images/harita.jpg')" onerror="this.onerror=null;this.src='images/proje-1.jpg';">
                 </div>
             </div>
             <div class="contact-info">
@@ -61,7 +50,6 @@
         </div>
     </section>
 
-    <!-- Lightbox -->
     <div id="lightbox" class="lightbox" onclick="closeLightbox()">
         <div class="lightbox-content" onclick="event.stopPropagation()">
             <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
@@ -69,7 +57,6 @@
         </div>
     </div>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
@@ -107,7 +94,6 @@
         </div>
     </footer>
 
-    <!-- Fixed Contact Buttons -->
     <div class="fixed-contact-buttons">
         <a href="tel:+905541674804" class="fixed-call">
             <i class="fas fa-phone"></i>
