@@ -84,16 +84,17 @@
             color: var(--dark);
         }
         
-        nav ul {
+        /* Navigation */
+        .desktop-nav ul {
             display: flex;
             list-style: none;
         }
         
-        nav ul li {
+        .desktop-nav ul li {
             margin-left: 30px;
         }
         
-        nav ul li a {
+        .desktop-nav ul li a {
             text-decoration: none;
             color: var(--dark);
             font-weight: 500;
@@ -103,11 +104,11 @@
             transition: all 0.3s ease;
         }
         
-        nav ul li a:hover {
+        .desktop-nav ul li a:hover {
             color: var(--primary);
         }
         
-        nav ul li a::after {
+        .desktop-nav ul li a::after {
             content: '';
             position: absolute;
             bottom: 0;
@@ -118,7 +119,7 @@
             transition: width 0.3s ease;
         }
         
-        nav ul li a:hover::after {
+        .desktop-nav ul li a:hover::after {
             width: 100%;
         }
         
@@ -168,7 +169,7 @@
         /* Hero Section */
         .hero {
             height: 100vh;
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1585123334904-845d60e97b29?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1600566752229-250d58d2406e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
             background-size: cover;
             background-position: center;
             display: flex;
@@ -532,7 +533,7 @@
                 padding: 15px;
             }
             
-            nav ul li {
+            .desktop-nav ul li {
                 margin-left: 20px;
             }
             
@@ -709,7 +710,7 @@
             <!-- Lüks Banyo Dekorasyonu -->
             <div class="project-card">
                 <div class="project-image">
-                    <img src="https://images.unsplash.com/photo-1585123334904-845d60e97b29?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80" alt="Lüks Banyo Dekorasyonu">
+                    <img src="https://images.unsplash.com/photo-1600566752229-250d58d2406e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80" alt="Lüks Banyo Dekorasyonu">
                 </div>
                 <div class="project-info">
                     <span class="project-tag">Banyo Dekorasyonu</span>
@@ -718,10 +719,10 @@
                 </div>
             </div>
             
-            <!-- Yeni Proje 1: Dış Cephe Boyama -->
+            <!-- Dış Cephe Boyama -->
             <div class="project-card">
                 <div class="project-image">
-                    <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80" alt="Dış Cephe Boyama">
+                    <img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80" alt="Dış Cephe Boyama">
                 </div>
                 <div class="project-info">
                     <span class="project-tag">Dış Cephe</span>
@@ -730,7 +731,7 @@
                 </div>
             </div>
             
-            <!-- Yeni Proje 2: Oturma Odası Dekorasyonu -->
+            <!-- Oturma Odası Dekorasyonu -->
             <div class="project-card">
                 <div class="project-image">
                     <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80" alt="Oturma Odası Dekorasyonu">
