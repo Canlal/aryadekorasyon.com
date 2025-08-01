@@ -174,8 +174,7 @@
         /* Hero Section */
         .hero {
             height: 100vh;
-            background-size: cover;
-            background-position: center;
+            background-color: #000; /* İlk açılışta simsiyah ekran */
             margin-top: 80px;
             position: relative;
             overflow: hidden;
@@ -955,8 +954,17 @@
         });
         
         // Hero background image rotation
+        const hero = document.querySelector('.hero');
         const heroBackgrounds = document.querySelectorAll('.hero-background');
         let currentBackground = 0;
+        
+        // İlk açılışta simsiyah ekran, 0.5 saniye sonra ilk resim
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                hero.style.backgroundColor = 'transparent';
+                heroBackgrounds[0].classList.add('active');
+            }, 500);
+        });
         
         function rotateBackground() {
             heroBackgrounds[currentBackground].classList.remove('active');
@@ -964,8 +972,10 @@
             heroBackgrounds[currentBackground].classList.add('active');
         }
         
-        // Rotate every 5 seconds
-        setInterval(rotateBackground, 5000);
+        // Rotate every 5 seconds, starting after initial delay
+        setTimeout(() => {
+            setInterval(rotateBackground, 5000);
+        }, 500);
     </script>
 </body>
 </html>
