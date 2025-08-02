@@ -964,28 +964,7 @@
         
         <div class="comments-container">
             <div id="comments-list">
-                <!-- Yorumlar burada görünecek -->
-                <div class="comment">
-                    <div class="comment-header">
-                        <div class="comment-avatar">A</div>
-                        <div class="comment-author">Ahmet Yılmaz</div>
-                        <div class="comment-date">15 Haziran 2025</div>
-                    </div>
-                    <div class="comment-text">
-                        Mutfağımızı Arya Dekorasyon yeniledi ve mükemmel oldu! Profesyonel ekibin titiz çalışması ve önerileri için teşekkür ederiz. Kesinlikle tavsiye ediyorum.
-                    </div>
-                </div>
-                
-                <div class="comment">
-                    <div class="comment-header">
-                        <div class="comment-avatar">E</div>
-                        <div class="comment-author">Elif Demir</div>
-                        <div class="comment-date">3 Mayıs 2025</div>
-                    </div>
-                    <div class="comment-text">
-                        Banyo yenileme işimizi Arya Dekorasyon'a yaptırdık. Zamanında teslim, uygun fiyat ve kaliteli işçilik. İşlerini çok severek yaptıkları belli oluyor.
-                    </div>
-                </div>
+                <!-- Yorumlar JavaScript ile buraya eklenecek -->
             </div>
             
             <div class="comment-form">
@@ -1192,6 +1171,11 @@
         const commentForm = document.getElementById('comment-form');
         const commentsList = document.getElementById('comments-list');
         
+        // Sayfa yüklendiğinde kayıtlı yorumları yükle
+        document.addEventListener('DOMContentLoaded', function() {
+            loadComments();
+        });
+        
         // Yorum formu gönderildiğinde
         commentForm.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -1203,7 +1187,14 @@
             const text = textInput.value.trim();
             
             if (name && text) {
-                addComment(name, text);
+                const comment = {
+                    name: name,
+                    text: text,
+                    date: new Date().toISOString()
+                };
+                
+                saveComment(comment);
+                addCommentToDOM(comment);
                 
                 // Formu temizle
                 nameInput.value = '';
@@ -1216,9 +1207,42 @@
             }
         });
         
-        // Yeni yorum ekleme fonksiyonu
-        function addComment(name, text) {
-            const now = new Date();
+        // Yorumu localStorage'a kaydet
+        function saveComment(comment) {
+            let comments = JSON.parse(localStorage.getItem('arya-dekorasyon-comments')) || [];
+            comments.unshift(comment); // Yeni yorumu en başa ekle
+            localStorage.setItem('arya-dekorasyon-comments', JSON.stringify(comments));
+        }
+        
+        // Yorumları localStorage'dan yükle
+        function loadComments() {
+            let comments = JSON.parse(localStorage.getItem('arya-dekorasyon-comments')) || [];
+            
+            // Örnek yorumlar (ilk yüklemede)
+            if (comments.length === 0) {
+                comments = [
+                    {
+                        name: "Ahmet Yılmaz",
+                        text: "Mutfağımızı Arya Dekorasyon yeniledi ve mükemmel oldu! Profesyonel ekibin titiz çalışması ve önerileri için teşekkür ederiz. Kesinlikle tavsiye ediyorum.",
+                        date: "2025-06-15T12:00:00.000Z"
+                    },
+                    {
+                        name: "Elif Demir",
+                        text: "Banyo yenileme işimizi Arya Dekorasyon'a yaptırdık. Zamanında teslim, uygun fiyat ve kaliteli işçilik. İşlerini çok severek yaptıkları belli oluyor.",
+                        date: "2025-05-03T10:30:00.000Z"
+                    }
+                ];
+                localStorage.setItem('arya-dekorasyon-comments', JSON.stringify(comments));
+            }
+            
+            comments.forEach(comment => {
+                addCommentToDOM(comment);
+            });
+        }
+        
+        // Yorumu DOM'a ekle
+        function addCommentToDOM(comment) {
+            const now = new Date(comment.date);
             const dateString = `${now.getDate()} ${getMonthName(now.getMonth())} ${now.getFullYear()}`;
             
             const commentDiv = document.createElement('div');
@@ -1226,14 +1250,14 @@
             
             commentDiv.innerHTML = `
                 <div class="comment-header">
-                    <div class="comment-avatar">${name.charAt(0).toUpperCase()}</div>
-                    <div class="comment-author">${name}</div>
+                    <div class="comment-avatar">${comment.name.charAt(0).toUpperCase()}</div>
+                    <div class="comment-author">${comment.name}</div>
                     <div class="comment-date">${dateString}</div>
                 </div>
-                <div class="comment-text">${text}</div>
+                <div class="comment-text">${comment.text}</div>
             `;
             
-            commentsList.prepend(commentDiv);
+            commentsList.appendChild(commentDiv);
         }
         
         // Ay ismini döndüren yardımcı fonksiyon
