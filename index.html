@@ -375,6 +375,120 @@
             font-weight: 500;
         }
         
+        /* Reviews Section */
+        .reviews {
+            padding: 80px 20px;
+            background-color: var(--light);
+        }
+        
+        .reviews-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .review-form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .review-form h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--dark);
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .submit-review {
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .submit-review:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .reviews-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .review-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .review-card .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .review-card .reviewer-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .review-card .review-rating {
+            color: #f4c430;
+            font-size: 1rem;
+        }
+        
+        .review-card .review-comment {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        .review-card .review-date {
+            color: #999;
+            font-size: 0.85rem;
+            margin-top: 10px;
+        }
+        
         /* Contact Section */
         .contact {
             padding: 80px 20px;
@@ -639,6 +753,14 @@
             .mobile-menu ul li {
                 margin-bottom: 10px;
             }
+            
+            .reviews-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .review-form {
+                padding: 20px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -655,6 +777,10 @@
             }
             
             .projects {
+                padding: 60px 15px;
+            }
+            
+            .reviews {
                 padding: 60px 15px;
             }
             
@@ -680,6 +806,15 @@
                 margin-right: 0;
                 margin-bottom: 10px;
             }
+            
+            .review-form h3 {
+                font-size: 1.3rem;
+            }
+            
+            .submit-review {
+                width: 100%;
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -698,6 +833,7 @@
                 <ul>
                     <li><a href="#home">Ana Sayfa</a></li>
                     <li><a href="#projects">Projelerimiz</a></li>
+                    <li><a href="#reviews">Yorumlar</a></li>
                     <li><a href="#contact">İletişim</a></li>
                 </ul>
             </nav>
@@ -711,6 +847,7 @@
             <ul>
                 <li><a href="#home">Ana Sayfa</a></li>
                 <li><a href="#projects">Projelerimiz</a></li>
+                <li><a href="#reviews">Yorumlar</a></li>
                 <li><a href="#contact">İletişim</a></li>
             </ul>
         </div>
@@ -818,6 +955,44 @@
         </div>
     </section>
 
+    <!-- Reviews Section -->
+    <section class="reviews" id="reviews">
+        <div class="section-title">
+            <h2>Müşteri Yorumları</h2>
+        </div>
+        <div class="reviews-container">
+            <!-- Yorum Gönderme Formu -->
+            <div class="review-form">
+                <h3>Bir Yorum Bırakın</h3>
+                <form id="review-form">
+                    <div class="form-group">
+                        <label for="reviewer-name">Adınız:</label>
+                        <input type="text" id="reviewer-name" name="reviewer-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="review-rating">Puan:</label>
+                        <select id="review-rating" name="review-rating" required>
+                            <option value="5">★★★★★ (5 Yıldız)</option>
+                            <option value="4">★★★★☆ (4 Yıldız)</option>
+                            <option value="3">★★★☆☆ (3 Yıldız)</option>
+                            <option value="2">★★☆☆☆ (2 Yıldız)</option>
+                            <option value="1">★☆☆☆☆ (1 Yıldız)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="review-comment">Yorumunuz:</label>
+                        <textarea id="review-comment" name="review-comment" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-review">Yorum Gönder</button>
+                </form>
+            </div>
+            <!-- Yorumların Görüntüleneceği Alan -->
+            <div class="reviews-list" id="reviews-list">
+                <!-- Yorumlar JavaScript ile buraya eklenecek -->
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section class="contact" id="contact">
         <div class="contact-container">
@@ -887,6 +1062,7 @@
                 <ul class="footer-links">
                     <li><a href="#home">Ana Sayfa</a></li>
                     <li><a href="#projects">Projelerimiz</a></li>
+                    <li><a href="#reviews">Yorumlar</a></li>
                     <li><a href="#contact">İletişim</a></li>
                 </ul>
             </div>
@@ -1016,6 +1192,72 @@
         setTimeout(() => {
             setInterval(rotateBackground, 5000);
         }, 500);
+
+        // Yorum Gönderme
+        const reviewForm = document.getElementById('review-form');
+        const reviewsList = document.getElementById('reviews-list');
+
+        reviewForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const reviewerName = document.getElementById('reviewer-name').value.trim();
+            const reviewRating = document.getElementById('review-rating').value;
+            const reviewComment = document.getElementById('review-comment').value.trim();
+            const reviewDate = new Date().toLocaleString('tr-TR');
+
+            // Yorumu Firebase'e kaydet
+            const newReviewRef = database.ref('reviews').push();
+            newReviewRef.set({
+                name: reviewerName,
+                rating: parseInt(reviewRating),
+                comment: reviewComment,
+                date: reviewDate
+            }).then(() => {
+                // Formu sıfırla
+                reviewForm.reset();
+                alert('Yorumunuz başarıyla gönderildi!');
+            }).catch((error) => {
+                console.error('Yorum gönderilirken hata oluştu:', error);
+                alert('Yorum gönderilirken bir hata oluştu. Lütfen tekrar deneyin.');
+            });
+        });
+
+        // Yorumları Gerçek Zamanlı Görüntüleme
+        database.ref('reviews').on('value', (snapshot) => {
+            reviewsList.innerHTML = ''; // Mevcut yorumları temizle
+            const reviews = snapshot.val();
+            
+            if (reviews) {
+                // Yorumları tarihe göre sırala (en yeni en üstte)
+                const reviewsArray = Object.entries(reviews).sort((a, b) => {
+                    return new Date(b[1].date) - new Date(a[1].date);
+                });
+
+                reviewsArray.forEach(([key, review]) => {
+                    const stars = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
+                    const reviewCard = `
+                        <div class="review-card">
+                            <div class="review-header">
+                                <span class="reviewer-name">${sanitizeHTML(review.name)}</span>
+                                <span class="review-rating">${stars}</span>
+                            </div>
+                            <p class="review-comment">${sanitizeHTML(review.comment)}</p>
+                            <p class="review-date">${review.date}</p>
+                        </div>
+                    `;
+                    reviewsList.insertAdjacentHTML('beforeend', reviewCard);
+                });
+            } else {
+                reviewsList.innerHTML = '<p>Henüz yorum yok. İlk yorumu siz bırakın!</p>';
+            }
+        });
+
+        // HTML injection önlemek için basit bir sanitizasyon fonksiyonu
+        function sanitizeHTML(str) {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
     </script>
 </body>
 </html>
