@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js"></script>
     <style>
         :root {
             --primary: #8b5a2b;
@@ -1098,17 +1098,17 @@
     <script>
         // Firebase configuration
         const firebaseConfig = {
-            apiKey: "AIzaSyDqJ1v2J1v2J1v2J1v2J1v2J1v2J1v2J1v2",
+            apiKey: "AIzaSyDNVEP4hszf-gyFqag3vKKkIFeqR71nCxU",
             authDomain: "aryadekorasyon-b4439.firebaseapp.com",
             databaseURL: "https://aryadekorasyon-b4439-default-rtdb.firebaseio.com",
             projectId: "aryadekorasyon-b4439",
-            storageBucket: "aryadekorasyon-b4439.appspot.com",
-            messagingSenderId: "123456789012",
-            appId: "1:123456789012:web:abcdef1234567890abcdef"
+            storageBucket: "aryadekorasyon-b4439.firebasestorage.app",
+            messagingSenderId: "249853373952",
+            appId: "1:249853373952:web:993f739b8756def44772e5"
         };
 
         // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
+        const app = firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
 
         // Mobile Menu Toggle
