@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js"></script>
     <style>
         :root {
             --primary: #8b5a2b;
@@ -964,7 +964,7 @@
             <!-- Yorum Gönderme Formu -->
             <div class="review-form">
                 <h3>Bir Yorum Bırakın</h3>
-                <form id="review-form">
+                <form id="review-form" method="post">
                     <div class="form-group">
                         <label for="reviewer-name">Adınız:</label>
                         <input type="text" id="reviewer-name" name="reviewer-name" required>
@@ -1106,8 +1106,13 @@
         };
 
         // Initialize Firebase
-        const app = firebase.initializeApp(firebaseConfig);
-        const database = firebase.database();
+        try {
+            const app = firebase.initializeApp(firebaseConfig);
+            const database = firebase.database();
+            console.log("Firebase başarıyla başlatıldı");
+        } catch (error) {
+            console.error("Firebase başlatılırken hata:", error);
+        }
 
         // Mobile Menu Toggle
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
@@ -1199,58 +1204,69 @@
 
         reviewForm.addEventListener('submit', (e) => {
             e.preventDefault();
+            console.log('Form gönderildi');
 
             const reviewerName = document.getElementById('reviewer-name').value.trim();
             const reviewRating = document.getElementById('review-rating').value;
             const reviewComment = document.getElementById('review-comment').value.trim();
             const reviewDate = new Date().toLocaleString('tr-TR');
 
-            // Yorumu Firebase'e kaydet
-            const newReviewRef = database.ref('reviews').push();
-            newReviewRef.set({
-                name: reviewerName,
-                rating: parseInt(reviewRating),
-                comment: reviewComment,
-                date: reviewDate
-            }).then(() => {
-                // Formu sıfırla
-                reviewForm.reset();
-                alert('Yorumunuz başarıyla gönderildi!');
-            }).catch((error) => {
-                console.error('Yorum gönderilirken hata oluştu:', error);
-                alert('Yorum gönderilirken bir hata oluştu. Lütfen tekrar deneyin.');
-            });
+            console.log('Yorum verileri:', { reviewerName, reviewRating, reviewComment, reviewDate });
+
+            try {
+                const newReviewRef = firebase.database().ref('reviews').push();
+                newReviewRef.set({
+                    name: reviewerName,
+                    rating: parseInt(reviewRating),
+                    comment: reviewComment,
+                    date: reviewDate
+                }).then(() => {
+                    console.log('Yorum başarıyla kaydedildi');
+                    reviewForm.reset();
+                    alert('Yorumunuz başarıyla gönderildi!');
+                }).catch((error) => {
+                    console.error('Yorum gönderilirken hata:', error);
+                    alert('Yorum gönderilirken hata oluştu: ' + error.message);
+                });
+            } catch (error) {
+                console.error('Firebase database erişim hatası:', error);
+                alert('Firebase bağlantısında hata: ' + error.message);
+            }
         });
 
         // Yorumları Gerçek Zamanlı Görüntüleme
-        database.ref('reviews').on('value', (snapshot) => {
-            reviewsList.innerHTML = ''; // Mevcut yorumları temizle
-            const reviews = snapshot.val();
-            
-            if (reviews) {
-                // Yorumları tarihe göre sırala (en yeni en üstte)
-                const reviewsArray = Object.entries(reviews).sort((a, b) => {
-                    return new Date(b[1].date) - new Date(a[1].date);
-                });
+        try {
+            firebase.database().ref('reviews').on('value', (snapshot) => {
+                console.log('Veri alındı:', snapshot.val());
+                reviewsList.innerHTML = '';
+                const reviews = snapshot.val();
+                
+                if (reviews) {
+                    const reviewsArray = Object.entries(reviews).sort((a, b) => {
+                        return new Date(b[1].date) - new Date(a[1].date);
+                    });
 
-                reviewsArray.forEach(([key, review]) => {
-                    const stars = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
-                    const reviewCard = `
-                        <div class="review-card">
-                            <div class="review-header">
-                                <span class="reviewer-name">${sanitizeHTML(review.name)}</span>
-                                <span class="review-rating">${stars}</span>
+                    reviewsArray.forEach(([key, review]) => {
+                        const stars = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
+                        const reviewCard = `
+                            <div class="review-card">
+                                <div class="review-header">
+                                    <span class="reviewer-name">${sanitizeHTML(review.name)}</span>
+                                    <span class="review-rating">${stars}</span>
+                                </div>
+                                <p class="review-comment">${sanitizeHTML(review.comment)}</p>
+                                <p class="review-date">${review.date}</p>
                             </div>
-                            <p class="review-comment">${sanitizeHTML(review.comment)}</p>
-                            <p class="review-date">${review.date}</p>
-                        </div>
-                    `;
-                    reviewsList.insertAdjacentHTML('beforeend', reviewCard);
-                });
-            } else {
-                reviewsList.innerHTML = '<p>Henüz yorum yok. İlk yorumu siz bırakın!</p>';
-            }
-        });
+                        `;
+                        reviewsList.insertAdjacentHTML('beforeend', reviewCard);
+                    });
+                } else {
+                    reviewsList.innerHTML = '<p>Henüz yorum yok. İlk yorumu siz bırakın!</p>';
+                }
+            });
+        } catch (error) {
+            console.error('Yorumlar yüklenirken hata:', error);
+        }
 
         // HTML injection önlemek için basit bir sanitizasyon fonksiyonu
         function sanitizeHTML(str) {
