@@ -9,24 +9,6 @@
     <meta name="author" content="Arya Dekorasyon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <!-- Yapılandırılmış Veri (Schema Markup) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "Arya Dekorasyon",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Esenyurt",
-        "addressLocality": "İstanbul",
-        "addressCountry": "TR"
-      },
-      "telephone": "+905457884975",
-      "url": "https://aryadekorasyon.com",
-      "image": "https://aryadekorasyon.com/logo.png",
-      "description": "İstanbul'da iç mekan dekorasyonu, mutfak tasarımı ve banyo yenileme hizmetleri sunuyoruz."
-    }
-    </script>
     <style>
         :root {
             --primary: #8b5a2b;
@@ -503,6 +485,29 @@
             transform: translateY(-2px);
         }
         
+        .form-note {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 15px;
+            text-align: center;
+        }
+        
+        .error-message {
+            color: #d9534f;
+            text-align: center;
+            padding: 20px;
+            background-color: #f8d7da;
+            border-radius: 5px;
+        }
+        
+        .github-info {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+        
         /* Contact Section */
         .contact {
             padding: 80px 20px;
@@ -964,7 +969,7 @@
         
         <div class="comments-container">
             <div id="comments-list">
-                <!-- Yorumlar JavaScript ile buraya eklenecek -->
+                <p>Yorumlar yükleniyor...</p>
             </div>
             
             <div class="comment-form">
@@ -978,6 +983,10 @@
                     </div>
                     <button type="submit" class="submit-button">Yorum Gönder</button>
                 </form>
+                <p class="form-note">Yorumunuz GitHub Issues üzerinden onaylandıktan sonra görünecektir.</p>
+                <div class="github-info">
+                    <p><i class="fab fa-github"></i> Yorum sistemi GitHub Issues altyapısını kullanmaktadır.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -1167,98 +1176,88 @@
             setInterval(rotateBackground, 5000);
         }, 500);
         
-        // Yorum Sistemi
-        const commentForm = document.getElementById('comment-form');
-        const commentsList = document.getElementById('comments-list');
+        // GitHub Entegrasyonu
+        const GITHUB_REPO = "kullaniciadi/aryadekorasyon"; // GitHub repo adınız
+        const COMMENTS_LABEL = "müşteri-yorumu"; // Yorumları işaretlemek için kullanılacak etiket
         
-        // Sayfa yüklendiğinde kayıtlı yorumları yükle
+        // Sayfa yüklendiğinde yorumları getir
         document.addEventListener('DOMContentLoaded', function() {
-            loadComments();
+            loadCommentsFromGitHub();
         });
         
-        // Yorum formu gönderildiğinde
-        commentForm.addEventListener('submit', function(e) {
+        // GitHub'dan yorumları yükle
+        async function loadCommentsFromGitHub() {
+            const commentsList = document.getElementById('comments-list');
+            
+            try {
+                const response = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/issues?labels=${COMMENTS_LABEL}`);
+                
+                if (!response.ok) {
+                    throw new Error('Yorumlar yüklenemedi');
+                }
+                
+                const issues = await response.json();
+                commentsList.innerHTML = '';
+                
+                if (issues.length === 0) {
+                    commentsList.innerHTML = '<p>Henüz yorum yapılmamış. İlk yorumu siz yazın!</p>';
+                    return;
+                }
+                
+                issues.forEach(issue => {
+                    const commentDate = new Date(issue.created_at);
+                    const dateString = `${commentDate.getDate()} ${getMonthName(commentDate.getMonth())} ${commentDate.getFullYear()}`;
+                    
+                    const commentDiv = document.createElement('div');
+                    commentDiv.className = 'comment';
+                    commentDiv.innerHTML = `
+                        <div class="comment-header">
+                            <div class="comment-avatar">${issue.title.charAt(0).toUpperCase()}</div>
+                            <div class="comment-author">${issue.title}</div>
+                            <div class="comment-date">${dateString}</div>
+                        </div>
+                        <div class="comment-text">${issue.body}</div>
+                    `;
+                    
+                    commentsList.appendChild(commentDiv);
+                });
+                
+            } catch (error) {
+                console.error('Yorumlar yüklenirken hata:', error);
+                commentsList.innerHTML = `
+                    <div class="error-message">
+                        <p>Yorumlar şu anda yüklenemiyor.</p>
+                        <p>Lütfen daha sonra tekrar deneyin veya <a href="#contact">iletişime geçin</a>.</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // Yorum gönderme formu
+        document.getElementById('comment-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            const nameInput = document.getElementById('comment-name');
-            const textInput = document.getElementById('comment-text');
+            const name = document.getElementById('comment-name').value.trim();
+            const text = document.getElementById('comment-text').value.trim();
             
-            const name = nameInput.value.trim();
-            const text = textInput.value.trim();
-            
-            if (name && text) {
-                const comment = {
-                    name: name,
-                    text: text,
-                    date: new Date().toISOString()
-                };
-                
-                saveComment(comment);
-                addCommentToDOM(comment);
-                
-                // Formu temizle
-                nameInput.value = '';
-                textInput.value = '';
-                
-                // Kullanıcıya geri bildirim
-                alert('Yorumunuz için teşekkür ederiz!');
-            } else {
+            if (!name || !text) {
                 alert('Lütfen adınızı ve yorumunuzu giriniz.');
+                return;
             }
+            
+            // GitHub'da issue oluşturmak için kullanıcıyı yönlendir
+            const issueTitle = encodeURIComponent(name);
+            const issueBody = encodeURIComponent(text);
+            const issueUrl = `https://github.com/${GITHUB_REPO}/issues/new?title=${issueTitle}&body=${issueBody}&labels=${COMMENTS_LABEL}`;
+            
+            window.open(issueUrl, '_blank');
+            
+            // Formu temizle
+            document.getElementById('comment-form').reset();
+            
+            // Kullanıcıyı bilgilendir
+            alert('GitHub sayfasına yönlendiriliyorsunuz. Yorumunuzu orada gönderdikten sonra yönetici onayıyla sitede görünecektir.');
         });
-        
-        // Yorumu localStorage'a kaydet
-        function saveComment(comment) {
-            let comments = JSON.parse(localStorage.getItem('arya-dekorasyon-comments')) || [];
-            comments.unshift(comment); // Yeni yorumu en başa ekle
-            localStorage.setItem('arya-dekorasyon-comments', JSON.stringify(comments));
-        }
-        
-        // Yorumları localStorage'dan yükle
-        function loadComments() {
-            let comments = JSON.parse(localStorage.getItem('arya-dekorasyon-comments')) || [];
-            
-            // Örnek yorumlar (ilk yüklemede)
-            if (comments.length === 0) {
-                comments = [
-                    {
-                        name: "Ahmet Yılmaz",
-                        text: "Mutfağımızı Arya Dekorasyon yeniledi ve mükemmel oldu! Profesyonel ekibin titiz çalışması ve önerileri için teşekkür ederiz. Kesinlikle tavsiye ediyorum.",
-                        date: "2025-06-15T12:00:00.000Z"
-                    },
-                    {
-                        name: "Elif Demir",
-                        text: "Banyo yenileme işimizi Arya Dekorasyon'a yaptırdık. Zamanında teslim, uygun fiyat ve kaliteli işçilik. İşlerini çok severek yaptıkları belli oluyor.",
-                        date: "2025-05-03T10:30:00.000Z"
-                    }
-                ];
-                localStorage.setItem('arya-dekorasyon-comments', JSON.stringify(comments));
-            }
-            
-            comments.forEach(comment => {
-                addCommentToDOM(comment);
-            });
-        }
-        
-        // Yorumu DOM'a ekle
-        function addCommentToDOM(comment) {
-            const now = new Date(comment.date);
-            const dateString = `${now.getDate()} ${getMonthName(now.getMonth())} ${now.getFullYear()}`;
-            
-            const commentDiv = document.createElement('div');
-            commentDiv.className = 'comment';
-            
-            commentDiv.innerHTML = `
-                <div class="comment-header">
-                    <div class="comment-avatar">${comment.name.charAt(0).toUpperCase()}</div>
-                    <div class="comment-author">${comment.name}</div>
-                    <div class="comment-date">${dateString}</div>
-                </div>
-                <div class="comment-text">${comment.text}</div>
-            `;
-            
-            commentsList.appendChild(commentDiv);
-        }
         
         // Ay ismini döndüren yardımcı fonksiyon
         function getMonthName(monthIndex) {
