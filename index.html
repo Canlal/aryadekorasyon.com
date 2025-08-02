@@ -375,144 +375,6 @@
             font-weight: 500;
         }
         
-        /* Comments Section */
-        .comments {
-            padding: 80px 20px;
-            background-color: var(--light);
-        }
-        
-        .comments-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        #comments-list {
-            margin-bottom: 40px;
-        }
-        
-        .comment {
-            background-color: white;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-        }
-        
-        .comment-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        
-        .comment-avatar {
-            width: 40px;
-            height: 40px;
-            background-color: var(--secondary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-            color: var(--dark);
-            font-weight: bold;
-        }
-        
-        .comment-author {
-            font-weight: 600;
-            color: var(--dark);
-        }
-        
-        .comment-date {
-            font-size: 0.8rem;
-            color: #777;
-            margin-left: 10px;
-        }
-        
-        .comment-text {
-            color: #555;
-            line-height: 1.6;
-        }
-        
-        .comment-form {
-            background-color: white;
-            border-radius: 8px;
-            padding: 30px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-        }
-        
-        .comment-form h3 {
-            margin-bottom: 20px;
-            color: var(--dark);
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-        
-        .form-group input:focus,
-        .form-group textarea:focus {
-            border-color: var(--primary);
-            outline: none;
-        }
-        
-        .form-group textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-        
-        .submit-button {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 5px;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .submit-button:hover {
-            background-color: #7a4d24;
-            transform: translateY(-2px);
-        }
-        
-        .form-note {
-            font-size: 0.9rem;
-            color: #666;
-            margin-top: 15px;
-            text-align: center;
-        }
-        
-        .error-message {
-            color: #d9534f;
-            text-align: center;
-            padding: 20px;
-            background-color: #f8d7da;
-            border-radius: 5px;
-        }
-        
-        .success-message {
-            color: #28a745;
-            text-align: center;
-            padding: 20px;
-            background-color: #d4edda;
-            border-radius: 5px;
-            margin-top: 15px;
-            display: none;
-        }
-        
         /* Contact Section */
         .contact {
             padding: 80px 20px;
@@ -777,10 +639,6 @@
             .mobile-menu ul li {
                 margin-bottom: 10px;
             }
-            
-            .comment-form {
-                padding: 20px;
-            }
         }
         
         @media (max-width: 480px) {
@@ -797,10 +655,6 @@
             }
             
             .projects {
-                padding: 60px 15px;
-            }
-            
-            .comments {
                 padding: 60px 15px;
             }
             
@@ -844,7 +698,6 @@
                 <ul>
                     <li><a href="#home">Ana Sayfa</a></li>
                     <li><a href="#projects">Projelerimiz</a></li>
-                    <li><a href="#comments">Yorumlar</a></li>
                     <li><a href="#contact">İletişim</a></li>
                 </ul>
             </nav>
@@ -858,7 +711,6 @@
             <ul>
                 <li><a href="#home">Ana Sayfa</a></li>
                 <li><a href="#projects">Projelerimiz</a></li>
-                <li><a href="#comments">Yorumlar</a></li>
                 <li><a href="#contact">İletişim</a></li>
             </ul>
         </div>
@@ -966,35 +818,6 @@
         </div>
     </section>
 
-    <!-- Comments Section -->
-    <section class="comments" id="comments">
-        <div class="section-title">
-            <h2>Müşteri Yorumları</h2>
-        </div>
-        
-        <div class="comments-container">
-            <div id="comments-list">
-                <p>Yorumlar yükleniyor...</p>
-            </div>
-            
-            <div class="comment-form">
-                <h3>Yorumunuzu Ekleyin</h3>
-                <form id="comment-form">
-                    <div class="form-group">
-                        <input type="text" id="comment-name" placeholder="Adınız" required>
-                    </div>
-                    <div class="form-group">
-                        <textarea id="comment-text" placeholder="Yorumunuz" required></textarea>
-                    </div>
-                    <button type="submit" class="submit-button">Yorum Gönder</button>
-                </form>
-                <div id="success-message" class="success-message">
-                    Yorumunuz başarıyla gönderildi! Teşekkür ederiz.
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Contact Section -->
     <section class="contact" id="contact">
         <div class="contact-container">
@@ -1064,7 +887,6 @@
                 <ul class="footer-links">
                     <li><a href="#home">Ana Sayfa</a></li>
                     <li><a href="#projects">Projelerimiz</a></li>
-                    <li><a href="#comments">Yorumlar</a></li>
                     <li><a href="#contact">İletişim</a></li>
                 </ul>
             </div>
@@ -1194,109 +1016,6 @@
         setTimeout(() => {
             setInterval(rotateBackground, 5000);
         }, 500);
-        
-        // Firebase Yorum Sistemi
-        document.addEventListener('DOMContentLoaded', function() {
-            loadCommentsFromFirebase();
-        });
-        
-        // Firebase'den yorumları yükle
-        function loadCommentsFromFirebase() {
-            const commentsList = document.getElementById('comments-list');
-            commentsList.innerHTML = '<p>Yorumlar yükleniyor...</p>';
-            
-            const commentsRef = database.ref('comments');
-            commentsRef.orderByChild('timestamp').once('value')
-                .then((snapshot) => {
-                    const commentsData = snapshot.val();
-                    commentsList.innerHTML = '';
-                    
-                    if (!commentsData) {
-                        commentsList.innerHTML = '<p>Henüz yorum yapılmamış. İlk yorumu siz yazın!</p>';
-                        return;
-                    }
-                    
-                    // Yorumları sırala (yeniden eskiye)
-                    const sortedComments = Object.values(commentsData).sort((a, b) => b.timestamp - a.timestamp);
-                    
-                    sortedComments.forEach(comment => {
-                        const commentDate = new Date(comment.timestamp);
-                        const dateString = `${commentDate.getDate()} ${getMonthName(commentDate.getMonth())} ${commentDate.getFullYear()}`;
-                        
-                        const commentDiv = document.createElement('div');
-                        commentDiv.className = 'comment';
-                        commentDiv.innerHTML = `
-                            <div class="comment-header">
-                                <div class="comment-avatar">${comment.name.charAt(0).toUpperCase()}</div>
-                                <div class="comment-author">${comment.name}</div>
-                                <div class="comment-date">${dateString}</div>
-                            </div>
-                            <div class="comment-text">${comment.text}</div>
-                        `;
-                        
-                        commentsList.appendChild(commentDiv);
-                    });
-                })
-                .catch((error) => {
-                    console.error('Yorumlar yüklenirken hata:', error);
-                    commentsList.innerHTML = `
-                        <div class="error-message">
-                            <p>Yorumlar şu anda yüklenemiyor.</p>
-                            <p>Lütfen daha sonra tekrar deneyin veya <a href="#contact">iletişime geçin</a>.</p>
-                        </div>
-                    `;
-                });
-        }
-        
-        // Yeni yorum ekle
-        document.getElementById('comment-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const name = document.getElementById('comment-name').value.trim();
-            const text = document.getElementById('comment-text').value.trim();
-            const successMessage = document.getElementById('success-message');
-            
-            if (!name || !text) {
-                alert('Lütfen adınızı ve yorumunuzu giriniz.');
-                return;
-            }
-            
-            // Firebase'e yorumu ekle
-            const commentsRef = database.ref('comments');
-            const newCommentRef = commentsRef.push();
-            
-            newCommentRef.set({
-                name: name,
-                text: text,
-                timestamp: Date.now()
-            })
-            .then(() => {
-                // Formu temizle
-                document.getElementById('comment-form').reset();
-                
-                // Başarı mesajını göster
-                successMessage.style.display = 'block';
-                setTimeout(() => {
-                    successMessage.style.display = 'none';
-                }, 5000);
-                
-                // Yorum listesini yenile
-                loadCommentsFromFirebase();
-            })
-            .catch((error) => {
-                console.error('Yorum gönderilirken hata:', error);
-                alert('Yorum gönderilirken bir hata oluştu. Lütfen tekrar deneyin.');
-            });
-        });
-        
-        // Ay ismini döndüren yardımcı fonksiyon
-        function getMonthName(monthIndex) {
-            const months = [
-                'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
-                'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'
-            ];  
-            return months[monthIndex];
-        }
     </script>
 </body>
 </html>
