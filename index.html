@@ -9,6 +9,9 @@
     <meta name="author" content="Arya Dekorasyon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
     <style>
         :root {
             --primary: #8b5a2b;
@@ -500,12 +503,14 @@
             border-radius: 5px;
         }
         
-        .github-info {
-            background-color: #f5f5f5;
-            padding: 15px;
+        .success-message {
+            color: #28a745;
+            text-align: center;
+            padding: 20px;
+            background-color: #d4edda;
             border-radius: 5px;
-            margin-top: 20px;
-            font-size: 0.9rem;
+            margin-top: 15px;
+            display: none;
         }
         
         /* Contact Section */
@@ -983,9 +988,8 @@
                     </div>
                     <button type="submit" class="submit-button">Yorum Gönder</button>
                 </form>
-                <p class="form-note">Yorumunuz GitHub Issues üzerinden onaylandıktan sonra görünecektir.</p>
-                <div class="github-info">
-                    <p><i class="fab fa-github"></i> Yorum sistemi GitHub Issues altyapısını kullanmaktadır.</p>
+                <div id="success-message" class="success-message">
+                    Yorumunuz başarıyla gönderildi! Teşekkür ederiz.
                 </div>
             </div>
         </div>
@@ -1092,6 +1096,21 @@
     </footer>
 
     <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDqJ1v2J1v2J1v2J1v2J1v2J1v2J1v2J1v2",
+            authDomain: "aryadekorasyon-b4439.firebaseapp.com",
+            databaseURL: "https://aryadekorasyon-b4439-default-rtdb.firebaseio.com",
+            projectId: "aryadekorasyon-b4439",
+            storageBucket: "aryadekorasyon-b4439.appspot.com",
+            messagingSenderId: "123456789012",
+            appId: "1:123456789012:web:abcdef1234567890abcdef"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
         // Mobile Menu Toggle
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const mobileMenu = document.querySelector('.mobile-menu');
@@ -1176,87 +1195,98 @@
             setInterval(rotateBackground, 5000);
         }, 500);
         
-        // GitHub Entegrasyonu
-        const GITHUB_REPO = "kullaniciadi/aryadekorasyon"; // GitHub repo adınız
-        const COMMENTS_LABEL = "müşteri-yorumu"; // Yorumları işaretlemek için kullanılacak etiket
-        
-        // Sayfa yüklendiğinde yorumları getir
+        // Firebase Yorum Sistemi
         document.addEventListener('DOMContentLoaded', function() {
-            loadCommentsFromGitHub();
+            loadCommentsFromFirebase();
         });
         
-        // GitHub'dan yorumları yükle
-        async function loadCommentsFromGitHub() {
+        // Firebase'den yorumları yükle
+        function loadCommentsFromFirebase() {
             const commentsList = document.getElementById('comments-list');
+            commentsList.innerHTML = '<p>Yorumlar yükleniyor...</p>';
             
-            try {
-                const response = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/issues?labels=${COMMENTS_LABEL}`);
-                
-                if (!response.ok) {
-                    throw new Error('Yorumlar yüklenemedi');
-                }
-                
-                const issues = await response.json();
-                commentsList.innerHTML = '';
-                
-                if (issues.length === 0) {
-                    commentsList.innerHTML = '<p>Henüz yorum yapılmamış. İlk yorumu siz yazın!</p>';
-                    return;
-                }
-                
-                issues.forEach(issue => {
-                    const commentDate = new Date(issue.created_at);
-                    const dateString = `${commentDate.getDate()} ${getMonthName(commentDate.getMonth())} ${commentDate.getFullYear()}`;
+            const commentsRef = database.ref('comments');
+            commentsRef.orderByChild('timestamp').once('value')
+                .then((snapshot) => {
+                    const commentsData = snapshot.val();
+                    commentsList.innerHTML = '';
                     
-                    const commentDiv = document.createElement('div');
-                    commentDiv.className = 'comment';
-                    commentDiv.innerHTML = `
-                        <div class="comment-header">
-                            <div class="comment-avatar">${issue.title.charAt(0).toUpperCase()}</div>
-                            <div class="comment-author">${issue.title}</div>
-                            <div class="comment-date">${dateString}</div>
+                    if (!commentsData) {
+                        commentsList.innerHTML = '<p>Henüz yorum yapılmamış. İlk yorumu siz yazın!</p>';
+                        return;
+                    }
+                    
+                    // Yorumları sırala (yeniden eskiye)
+                    const sortedComments = Object.values(commentsData).sort((a, b) => b.timestamp - a.timestamp);
+                    
+                    sortedComments.forEach(comment => {
+                        const commentDate = new Date(comment.timestamp);
+                        const dateString = `${commentDate.getDate()} ${getMonthName(commentDate.getMonth())} ${commentDate.getFullYear()}`;
+                        
+                        const commentDiv = document.createElement('div');
+                        commentDiv.className = 'comment';
+                        commentDiv.innerHTML = `
+                            <div class="comment-header">
+                                <div class="comment-avatar">${comment.name.charAt(0).toUpperCase()}</div>
+                                <div class="comment-author">${comment.name}</div>
+                                <div class="comment-date">${dateString}</div>
+                            </div>
+                            <div class="comment-text">${comment.text}</div>
+                        `;
+                        
+                        commentsList.appendChild(commentDiv);
+                    });
+                })
+                .catch((error) => {
+                    console.error('Yorumlar yüklenirken hata:', error);
+                    commentsList.innerHTML = `
+                        <div class="error-message">
+                            <p>Yorumlar şu anda yüklenemiyor.</p>
+                            <p>Lütfen daha sonra tekrar deneyin veya <a href="#contact">iletişime geçin</a>.</p>
                         </div>
-                        <div class="comment-text">${issue.body}</div>
                     `;
-                    
-                    commentsList.appendChild(commentDiv);
                 });
-                
-            } catch (error) {
-                console.error('Yorumlar yüklenirken hata:', error);
-                commentsList.innerHTML = `
-                    <div class="error-message">
-                        <p>Yorumlar şu anda yüklenemiyor.</p>
-                        <p>Lütfen daha sonra tekrar deneyin veya <a href="#contact">iletişime geçin</a>.</p>
-                    </div>
-                `;
-            }
         }
         
-        // Yorum gönderme formu
-        document.getElementById('comment-form').addEventListener('submit', async function(e) {
+        // Yeni yorum ekle
+        document.getElementById('comment-form').addEventListener('submit', function(e) {
             e.preventDefault();
             
             const name = document.getElementById('comment-name').value.trim();
             const text = document.getElementById('comment-text').value.trim();
+            const successMessage = document.getElementById('success-message');
             
             if (!name || !text) {
                 alert('Lütfen adınızı ve yorumunuzu giriniz.');
                 return;
             }
             
-            // GitHub'da issue oluşturmak için kullanıcıyı yönlendir
-            const issueTitle = encodeURIComponent(name);
-            const issueBody = encodeURIComponent(text);
-            const issueUrl = `https://github.com/${GITHUB_REPO}/issues/new?title=${issueTitle}&body=${issueBody}&labels=${COMMENTS_LABEL}`;
+            // Firebase'e yorumu ekle
+            const commentsRef = database.ref('comments');
+            const newCommentRef = commentsRef.push();
             
-            window.open(issueUrl, '_blank');
-            
-            // Formu temizle
-            document.getElementById('comment-form').reset();
-            
-            // Kullanıcıyı bilgilendir
-            alert('GitHub sayfasına yönlendiriliyorsunuz. Yorumunuzu orada gönderdikten sonra yönetici onayıyla sitede görünecektir.');
+            newCommentRef.set({
+                name: name,
+                text: text,
+                timestamp: Date.now()
+            })
+            .then(() => {
+                // Formu temizle
+                document.getElementById('comment-form').reset();
+                
+                // Başarı mesajını göster
+                successMessage.style.display = 'block';
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 5000);
+                
+                // Yorum listesini yenile
+                loadCommentsFromFirebase();
+            })
+            .catch((error) => {
+                console.error('Yorum gönderilirken hata:', error);
+                alert('Yorum gönderilirken bir hata oluştu. Lütfen tekrar deneyin.');
+            });
         });
         
         // Ay ismini döndüren yardımcı fonksiyon
@@ -1264,7 +1294,7 @@
             const months = [
                 'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
                 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'
-            ];
+            ];  
             return months[monthIndex];
         }
     </script>
